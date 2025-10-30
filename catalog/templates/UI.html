@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生成績系統</title>
+    <style>
+        /* ...existing code... */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #1a73e8;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .average {
+            font-weight: bold;
+            background-color: #e8f0fe;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>學生成績系統</h1>
+        
+        <h2>課程成績總覽</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>課程名稱</th>
+                    <th>學分</th>
+                    <th>成績</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.credits }}</td>
+                    <td>{{ course.score }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="average">
+                    <td colspan="2">平均分數</td>
+                    <td>{{ average_score }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
