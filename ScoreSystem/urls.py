@@ -17,11 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from catalog import views
-from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('submit-score/', views.submit_score, name='submit_score'),  # 新增這行
-    path('', views.UI, name='catalog'),  # 預設路由到 UI 頁面
-    path('home', views.home, name='home'),
+    path('submit-score/', views.submit_score, name='submit_score'),
+    path('', views.home, name='home'),
+    path('course/<int:course_id>/', views.course_detail, name='course_detail'),
+
 ]

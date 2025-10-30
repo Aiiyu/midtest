@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.name }} - 課程詳情</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .course-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'home' %}" class="back-link">← 返回首頁</a>
+        <div class="course-info">
+            <h1>{{ course.name }}</h1>
+            <p>學分數：{{ course.credits }}</p>
+            <p>成績：{{ course.score }}</p>
+        </div>
+    </div>
+</body>
+</html>

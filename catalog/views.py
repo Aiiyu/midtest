@@ -1,10 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from .models import Course
-
-# Create your views here.
-def UI(request):
-    return render(request, 'UI.html')
 
 def submit_score(request):
     if request.method == 'POST':
@@ -29,3 +25,7 @@ def home(request):
         'average_score': average_score,
     }
     return render(request, 'UI.html', context)
+
+def course_detail(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    return render(request, 'course_detail.html', {'course': course})
