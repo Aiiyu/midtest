@@ -33,3 +33,4 @@ def course_detail(request, course_id):
     else:
         course.total_score = None
     return render(request, 'course_detail.html', {'course': course})
+
