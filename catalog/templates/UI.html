@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>學生成績系統</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .average {
+            font-weight: bold;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .no-score {
+            color: #999;
+            font-style: italic;
+        }
+
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td::before {
+                position: absolute;
+                left: 10px;
+                top: 12px;
+                white-space: nowrap;
+                font-weight: bold;
+            }
+
+            td:nth-of-type(1)::before { content: "課程名稱"; }
+            td:nth-of-type(2)::before { content: "總成績"; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>學生成績系統</h1>
+
+        <h2>課程成績總覽</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>課程名稱</th>
+                    <th>總成績</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>
+                        <a href="{% url 'course_detail' course.id %}">
+                            {{ course.name }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if course.total_score %}
+                            {{ course.total_score }}
+                        {% else %}
+                            <span class="no-score">尚未計算</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr class="average">
+                    <td>平均成績</td>
+                    <td>{{ average_score }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

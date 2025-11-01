@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ course.name }} - 課程詳情</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .course-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .course-info h1 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .course-info h2 {
+            margin-bottom: 20px;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .course-info p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .no-score {
+            color: #999;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .course-info h1 {
+                font-size: 1.5em;
+            }
+
+            .course-info h2 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'home' %}" class="back-link">← 返回首頁</a>
+        <div class="course-info">
+            <h1>{{ course.name }}</h1>
+            <h2>課程代碼：{{ course.code }}</h2>
+
+            <p><span class="label">教師名稱：</span>{{ course.teacher_name }}</p>
+            <p><span class="label">學生名單：</span>{{ course.student_name }}</p>
+            <p><span class="label">學分：</span>{{ course.credits }}</p>
+
+            <p>
+                <span class="label">期中成績：</span>
+                {% if course.midscore %}
+                    {{ course.midscore }}
+                {% else %}
+                    <span class="no-score">尚未輸入</span>
+                {% endif %}
+            </p>
+
+            <p>
+                <span class="label">期末成績：</span>
+                {% if course.finalscore %}
+                    {{ course.finalscore }}
+                {% else %}
+                    <span class="no-score">尚未輸入</span>
+                {% endif %}
+            </p>
+
+            <p>
+                <span class="label">總成績：</span>
+                {% if course.total_score %}
+                    {{ course.total_score }}
+                {% else %}
+                    <span class="no-score">尚未計算</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</body>
+</html>
