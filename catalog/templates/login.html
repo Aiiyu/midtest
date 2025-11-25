@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>登入</title>
+</head>
+<body>
+    <div class="container">
+        <h1>使用者登入</h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="username" required>
+            <input type="password" name="password" placeholder="password" required>
+            <button type="submit">登入</button>
+        </form>
+        <p>還沒有帳號？<a href="{% url 'register' %}">註冊</a></p>
+    </div>
+</body>
+</html>

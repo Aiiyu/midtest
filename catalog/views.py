@@ -1,6 +1,11 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Course
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from .forms import RegisterForm
 
+@login_required(login_url='login')
 def home(request):
     courses = Course.objects.all()
     scored_courses = []
@@ -34,3 +39,27 @@ def course_detail(request, course_id):
         course.total_score = None
     return render(request, 'course_detail.html', {'course': course})
 
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+    return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
